@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iris Predictor</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    label { display: block; margin-top: 1rem; font-weight: 600; }
+    input { width: 100%; padding: 0.5rem; margin-top: 0.25rem; box-sizing: border-box; font-size: 1rem; }
+    button { margin-top: 1.5rem; padding: 0.6rem 1.2rem; font-size: 1rem; cursor: pointer; }
+    .result { margin-top: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 6px; background: #f6f8fa; }
+    .result h2 { margin-top: 0; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Iris Predictor</h1>
+  <p>Enter flower measurements in centimeters.</p>
+
+  <form method="post" action="/predict">
+    <label>Sepal length
+      <input type="number" name="sepal_length" step="0.1" min="0" max="20" required value="{{ values.get('sepal_length', 5.1) }}">
+    </label>
+    <label>Sepal width
+      <input type="number" name="sepal_width" step="0.1" min="0" max="20" required value="{{ values.get('sepal_width', 3.5) }}">
+    </label>
+    <label>Petal length
+      <input type="number" name="petal_length" step="0.1" min="0" max="20" required value="{{ values.get('petal_length', 1.4) }}">
+    </label>
+    <label>Petal width
+      <input type="number" name="petal_width" step="0.1" min="0" max="20" required value="{{ values.get('petal_width', 0.2) }}">
+    </label>
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if result %}
+  <div class="result">
+    <h2>Prediction: {{ result.species }}</h2>
+    <p>Confidence: {{ result.confidence }}%</p>
+    <small>
+      {% for name, pct in result.all %}{{ name }}: {{ pct }}%{% if not loop.last %} &middot; {% endif %}{% endfor %}
+    </small>
+  </div>
+  {% endif %}
+</body>
+</html>
