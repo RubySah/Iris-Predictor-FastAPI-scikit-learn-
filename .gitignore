@@ -25,3 +25,6 @@ data/iris.data
 .idea/
 .DS_Store
 Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
