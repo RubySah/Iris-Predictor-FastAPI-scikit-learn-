@@ -1,7 +1,4 @@
 """FastAPI app that serves the saved iris model through a simple HTML form.
-
-Run:  uvicorn main:app --reload
-Open: http://127.0.0.1:8000
 """
 from contextlib import asynccontextmanager
 from pathlib import Path
